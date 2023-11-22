@@ -29,10 +29,10 @@ def login():
                 print("Successfully logged in")
                 return {"username": entry["username"], "wallet": entry["wallet"] }
 
-        register = input("The user name is not to be found in the users file.\n Do you like to register (Y/N)?")
+        register = input("The username does not exist in the users file.\nDo you like to register (Y/N)?")
         if register.lower() == "y":
             password_for_new_user = input(
-                "Enter a password (It must be: \n 1-At least 1 capital letter.\n 2_At least 1 special symbol.\nThe minimum length is: 8):")
+                "\nEnter a password:\n 1-At least 1 capital letter.\n 2-At least 1 special symbol.\n 3-At least 8' tall: ")
             if is_valid_password(password_for_new_user):
                 new_user = {"username": username, "password": password_for_new_user, "wallet": 0}
                 data.append(new_user)
@@ -41,7 +41,7 @@ def login():
                 print("User registered successfully.")
                 return {"username": username, "wallet": 0}
             else:
-                print("Password does not meet the criteria. \n Registration failed.")
+                print("The password does not meet the criteria. \n Registration failed.\n")
 
     print("Either username or password were incorrect")
     return None
