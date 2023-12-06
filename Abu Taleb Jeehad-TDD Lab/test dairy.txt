@@ -1,0 +1,232 @@
+RED
+This test check if the function work for single name like simple_author_1 = Smith
+
+Test code
+
+def test_author_1(setup_data):
+    #test only surname
+    (Surname,FirstNames)=bibtex.extract_author(setup_data['simple_author_1'])
+    assert (Surname,FirstNames)==('Smith','')
+
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['simple_author_2'])
+    assert (Surname, FirstNames) == ('Jones', '')
+
+test.py::test_author_1 FAILED                                            [ 20%]
+test.py:15 (test_author_1)
+setup_data = {'author_1': 'Jones Smith', 'author_2': 'Bob Jones', 'author_3': 'Justin Kenneth Pearson', 'multiple_authors_1': 'Pearson, Justin and Jones, Bob', ...}
+
+    def test_author_1(setup_data):
+        #test only surname
+>       (Surname,FirstNames)=bibtex.extract_author(setup_data['simple_author_1'])
+E       TypeError: cannot unpack non-iterable int object
+
+test.py:18: TypeError
+
+Green
+I just return the string and a "" 
+
+Code added
+
+def extract_author(Aname):
+    return Aname,"";
+============================= test session starts =============================
+collecting ... collected 1 item
+
+test.py::test_author_1 PASSED                                            [100%]
+
+============================== 1 passed in 0.01s ==============================
+
+RED
+Test code 
+This test check if the function work for single name like author_1 = Jones Smith
+
+def test_author_2(setup_data):
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['author_1'])
+    assert (Surname, FirstNames) ==  ("Smith" , "Jones")
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['author_2'])
+    assert (Surname, FirstNames) == ("Jones" , "Bob")
+
+============================= test session starts =============================
+collecting ... collected 2 items
+
+test.py::test_author_1 PASSED                                            [ 50%]
+test.py::test_author_2 FAILED                                            [100%]
+test.py:23 (test_author_2)
+('Jones Smith', '') != ('Smith', 'Jones')
+
+Expected :('Smith', 'Jones')
+Actual   :('Jones Smith', '')
+<Click to see difference>
+
+GREEN
+I split the name with spaces and return them.
+
+Code added
+
+def extract_author(Aname):
+    name= Aname.split()
+    if(len(name)>1):
+        surName=name[-1]
+        firstName=name[0]
+        return surName,firstName
+    return Aname,"";
+
+============================= test session starts =============================
+collecting ... collected 2 items
+
+test.py::test_author_1 PASSED                                            [ 50%]
+test.py::test_author_2 PASSED                                            [100%]
+
+============================== 2 passed in 0.01s ==============================
+
+Process finished with exit code 0
+
+RED
+Test code 
+This test check if the function work for single name like author_3 = Justin Kenneth PearsonSmith
+
+def test_author_3(setup_data):
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['author_3'])
+    assert (Surname, FirstNames) ==  ("Pearson" , "Justin Kenneth")
+
+============================= test session starts =============================
+collecting ... collected 3 items
+
+test.py::test_author_1 PASSED                                            [ 33%]
+test.py::test_author_2 PASSED                                            [ 66%]
+test.py::test_author_3 FAILED                                            [100%]
+test.py:29 (test_author_3)
+('Pearson', 'Justin') != ('Pearson', 'Justin Kenneth')
+
+Expected :('Pearson', 'Justin Kenneth')
+Actual   :('Pearson', 'Justin')
+
+GREEN
+if the splited name and check it it has more than 3 words to counter this error.
+Added code: 
+
+def extract_author(Aname):
+    name=Aname.split()
+    if (len(name)>1):
+        surName=name[-1]
+        if len(name)>2:
+            fristName = name[0] + " "+ name[1]
+        else:
+            fristName=name[0]
+        return surName, fristName
+    return (Aname, "")
+
+
+
+============================= test session starts =============================
+collecting ... collected 3 items
+
+test.py::test_author_1 PASSED                                            [ 33%]
+test.py::test_author_2 PASSED                                            [ 66%]
+test.py::test_author_3 PASSED                                            [100%]
+
+============================== 3 passed in 0.01s ==============================
+
+Process finished with exit code 0
+
+RED
+This test check if the function work for single name like surname_first_1=Pearson, Justin Kenneth
+
+Test code
+ 
+def test_surname_first (setup_data) :
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['surname_first_1'])
+    assert (Surname, FirstNames) == ("Pearson", "Justin Kenneth")
+    (Surname, FirstNames) = bibtex.extract_author(setup_data['surname_first_2'])
+    assert (Surname, FirstNames) == ("Van Hentenryck", "Pascal")
+
+============================= test session starts =============================
+collecting ... collected 4 items
+
+test.py::test_author_1 PASSED                                            [ 25%]
+test.py::test_author_2 PASSED                                            [ 50%]
+test.py::test_author_3 PASSED                                            [ 75%]
+test.py::test_surname_first FAILED                                       [100%]
+test.py:33 (test_surname_first)
+('Kenneth', 'Pearson, Justin') != ('Pearson', 'Justin Kenneth')
+
+Expected :('Pearson', 'Justin Kenneth')
+Actual   :('Kenneth', 'Pearson, Justin')
+
+GREEN 
+I have added new if  it find "," it will split and split the name and show them as it need to.
+Added code
+
+def extract_author(Aname):
+    if(Aname.find(',')!=-1):
+        name = Aname.split(',')
+        if (len(name) > 1):
+            fristName=name[0].lstrip()
+            fristName=fristName.rstrip()
+            surName=name[1].lstrip()
+            surName= surName.rstrip()
+            return fristName,surName
+       
+    else:
+        name = Aname.split()
+        if (len(name)>1):
+            SurName = name[-1]
+            if len(name) > 2:
+                fristName = name[0] + " " + name[1]
+            else:
+                fristName = name[0]
+            return SurName, fristName
+        return (Aname, "")
+
+
+============================= test session starts =============================
+collecting ... collected 4 items
+
+test.py::test_author_1 PASSED                                            [ 25%]
+test.py::test_author_2 PASSED                                            [ 50%]
+test.py::test_author_3 PASSED                                            [ 75%]
+test.py::test_surname_first PASSED                                       [100%]
+
+
+RED
+
+This test check if the function work for single name like multiple_authors_1=Pearson, Justin and Jones, Bob
+
+Test code
+
+def test_multiple_authors_1 (setup_data) :
+    Authors = bibtex.extract_authors(setup_data['multiple_authors_1'])
+    assert Authors[0] == ("Pearson", "Justin")
+    assert Authors[1] == ("Jones", "Bob")
+
+test.py::test_author_1 PASSED                                            [ 20%]
+test.py::test_author_2 PASSED                                            [ 40%]
+test.py::test_author_3 PASSED                                            [ 60%]
+test.py::test_surname_first PASSED                                       [ 80%]
+test.py::test_multiple_authors_1 FAILED                                  [100%]
+test.py:38 (test_multiple_authors_1)
+
+GREEN 
+I have created a new function that split when it finds "and" , and send the split string in the old function.
+Code added 
+def extract_authors(Aname):
+    name = Aname.split('and')
+    Aurthors=[]
+    Aurthors.append(extract_author(name[0]))
+    Aurthors.append(extract_author(name[1]))
+    return Aurthors
+
+============================= test session starts =============================
+collecting ... collected 5 items
+
+test.py::test_author_1 PASSED                                            [ 20%]
+test.py::test_author_2 PASSED                                            [ 40%]
+test.py::test_author_3 PASSED                                            [ 60%]
+test.py::test_surname_first PASSED                                       [ 80%]
+test.py::test_multiple_authors_1 PASSED                                  [100%]
+
+============================== 5 passed in 0.02s ==============================
+
+
+
+
