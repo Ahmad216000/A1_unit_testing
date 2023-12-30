@@ -1,0 +1,39 @@
+Testing started at 16:08 ...
+Launching pytest with arguments C:\Users\Ahmad Ja\Downloads\Test\New folder (2)\test_login_profile_modification.py --no-header --no-summary -q in C:\Users\Ahmad Ja\Downloads\Test\New folder (2)
+
+============================= test session starts =============================
+collecting ... collected 13 items
+
+test_login_profile_modification.py::test_valid_password1 PASSED          [  7%]
+test_login_profile_modification.py::test_valid_password2 PASSED          [ 15%]
+test_login_profile_modification.py::test_invalid_password1 PASSED        [ 23%]
+test_login_profile_modification.py::test_invalid_password2 PASSED        [ 30%]
+test_login_profile_modification.py::test_login_with_valid_credentials1 PASSED [ 38%]User registered successfully
+
+test_login_profile_modification.py::test_logout_with_empty_cart PASSED   [ 46%]
+test_login_profile_modification.py::test_logout_with_non_empty_cart_logout_confirmed PASSED [ 53%]Your cart is not empty.You have following items
+['Product 1', 10.0, 2]
+['Product 2', 15.0, 1]
+['Product 3', 20.0, 3]
+
+test_login_profile_modification.py::test_logout_with_non_empty_cart_logout_cancelled PASSED [ 61%]Your cart is not empty.You have following items
+['Product A', 8.0, 1]
+['Product B', 12.0, 4]
+
+test_login_profile_modification.py::test_logout_with_single_item_cart_logout_confirmed PASSED [ 69%]Your cart is not empty.You have following items
+['Single Product', 5.0, 1]
+
+test_login_profile_modification.py::test_logout_with_multiple_items_invalid_input PASSED [ 76%]Your cart is not empty.You have following items
+['Item X', 8.0, 2]
+['Item Y', 10.0, 3]
+
+test_login_profile_modification.py::test_user_registration_with_additional_details PASSED [ 84%]User registered successfully
+
+test_login_profile_modification.py::test_add_user_details PASSED         [ 92%]User details have been added successfully.
+
+test_login_profile_modification.py::test_update_details_for_same_user PASSED [100%]User details have been updated successfully.
+
+
+======================== 13 passed, 1 warning in 0.10s ========================
+
+Process finished with exit code 0

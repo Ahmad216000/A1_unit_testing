@@ -1,0 +1,126 @@
+Testing started at 16:03 ...
+Launching pytest with arguments C:\Users\Ahmad Ja\Downloads\Test\New folder (2)\test_login_profile_modification.py --no-header --no-summary -q in C:\Users\Ahmad Ja\Downloads\Test\New folder (2)
+
+============================= test session starts =============================
+collecting ... collected 13 items
+
+test_login_profile_modification.py::test_valid_password1 PASSED          [  7%]
+test_login_profile_modification.py::test_valid_password2 PASSED          [ 15%]
+test_login_profile_modification.py::test_invalid_password1 PASSED        [ 23%]
+test_login_profile_modification.py::test_invalid_password2 PASSED        [ 30%]
+test_login_profile_modification.py::test_login_with_valid_credentials1 PASSED [ 38%]User registered successfully.
+
+test_login_profile_modification.py::test_logout_with_empty_cart PASSED   [ 46%]
+test_login_profile_modification.py::test_logout_with_non_empty_cart_logout_confirmed PASSED [ 53%]Your cart is not empty.You have following items
+['Product 1', 10.0, 2]
+['Product 2', 15.0, 1]
+['Product 3', 20.0, 3]
+
+test_login_profile_modification.py::test_logout_with_non_empty_cart_logout_cancelled PASSED [ 61%]Your cart is not empty.You have following items
+['Product A', 8.0, 1]
+['Product B', 12.0, 4]
+
+test_login_profile_modification.py::test_logout_with_single_item_cart_logout_confirmed PASSED [ 69%]Your cart is not empty.You have following items
+['Single Product', 5.0, 1]
+
+test_login_profile_modification.py::test_logout_with_multiple_items_invalid_input PASSED [ 76%]Your cart is not empty.You have following items
+['Item X', 8.0, 2]
+['Item Y', 10.0, 3]
+
+test_login_profile_modification.py::test_user_registration_with_additional_details FAILED [ 84%] 
+
+test_login_profile_modification.py:108 (test_user_registration_with_additional_details)
+def test_user_registration_with_additional_details():
+        # Load existing data from users.json if available
+        try:
+            with open('users.json', 'r') as file:
+                existing_data = json.load(file)
+        except FileNotFoundError:
+            existing_data = []
+    
+        new_user_data = {
+            "username": "testuser2",
+            "password": "Testpass@!",
+            "wallet": 0,
+            "address": "Karlaplan 1",
+            "phone_number": "073222222",
+            "email": "change_email@uu.se",
+            "credit_cards": [
+                {
+                    "card_number": "6666-5555-4444-3333",
+                    "expiry_date": "12/30",
+                    "name_on_card": "Uppsala Student",
+                    "cvv": "963"
+                }
+            ]
+        }
+    
+        # Append the new user data to existing_data
+        existing_data.append(new_user_data)
+    
+        # Write the updated data back to users.json
+        with open('users.json', "w") as file:
+            json.dump(existing_data, file, indent=4)
+    
+        # Simulate logging in with valid credentials
+        with patch('builtins.input', side_effect=["testuser2", "Testpass@!"]):
+            user_data = login.login()
+    
+        # Assert that the login function returned the expected user data
+        assert user_data["username"] == "testuser2"
+        assert user_data["wallet"] == 0
+>       assert user_data["address"] == "Karlaplan 1"
+E       KeyError: 'address'
+
+test_login_profile_modification.py:148: KeyError
+
+test_login_profile_modification.py::test_add_user_details FAILED         [ 92%]
+test_login_profile_modification.py:155 (test_add_user_details)
+def test_add_user_details():
+        # Create test input data
+        test_username = "Ramanathan"
+        test_address = "Karlaplan 2"
+        test_phone_number = "0711122233"
+        test_email = "change_email@uu.se"
+        test_card_number = "6666555544443355"
+        test_expiry_date = "12/30"
+        test_name_on_card = "Uppsala Student"
+        test_cvv = "963"
+    
+        # Simulate user input for the function
+        with patch('builtins.input',
+                   side_effect=[test_address, test_phone_number, test_email, test_card_number, test_expiry_date,
+                                test_name_on_card, test_cvv]):
+            # Call the function with the test username
+>           updated_user = profile_modification.add_user_details(test_username)
+E           NameError: name 'profile_modification' is not defined
+
+test_login_profile_modification.py:172: NameError
+
+test_login_profile_modification.py::test_update_details_for_same_user FAILED [100%]
+test_login_profile_modification.py:184 (test_update_details_for_same_user)
+def test_update_details_for_same_user():
+        # Create test another input data
+        test_username = "Ramanathan"
+        test_address = "Karlaplan 5"
+        test_phone_number = "0711155555"
+        test_email = "update_email@uu.se"
+        test_card_number = "1234567890123456"
+        test_expiry_date = "12/24"
+        test_name_on_card = "Stockholm Student"
+        test_cvv = "555"
+    
+        # Simulate user input for the function
+        with patch('builtins.input',
+                   side_effect=[test_address, test_phone_number, test_email, test_card_number, test_expiry_date,
+                                test_name_on_card, test_cvv]):
+            # Call the function with the test username
+>           updated_user = profile_modification.update_user_details(test_username)
+E           NameError: name 'profile_modification' is not defined
+
+test_login_profile_modification.py:201: NameError
+
+
+=================== 3 failed, 10 passed, 1 warning in 0.18s ===================
+
+Process finished with exit code 1
