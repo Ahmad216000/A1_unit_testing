@@ -1,0 +1,200 @@
+InputObject                                                                                                            SideIndicator
+-----------                                                                                                            -------------
+test_checkout_and_payment.py FFFFF...                                    [100%]                                        =>
+________________________________ test_add_item ________________________________                                        =>
+stub_logout = <MagicMock name='logout' id='2432994505888'>                                                             =>
+capsys = <_pytest.capture.CaptureFixture object at 0x0000023679C712E0>                                                 =>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023679C714F0>                                           =>
+    def test_add_item(stub_logout, capsys, monkeypatch):                                                               =>
+        login_details = {"username": "Simba", "wallet": 100}                                                           =>
+        cart = ShoppingCart()                                                                                          =>
+        products = [Product("Backpack", 15, 1)]                                                                        =>
+        monkeypatch.setattr("checkout_and_payment.cart", cart)                                                         =>
+        monkeypatch.setattr("builtins.input", fake_input(["1", "l", "y"]))                                             =>
+test_checkout_and_payment.py:81:                                                                                       =>
+login_info = {'username': 'Simba', 'wallet': 100}                                                                      =>
+    def checkoutAndPayment(login_info):                                                                                =>
+        # Create/retrieve a user using login information                                                               =>
+>       user = User(login_info["username"], login_info["wallet"],login_info["cards"])                                  =>
+E       KeyError: 'cards'                                                                                              =>
+checkout_and_payment.py:144: KeyError                                                                                  =>
+______________________________ test_out_of_stock ______________________________                                        =>
+stub_logout = <MagicMock name='logout' id='2432994579840'>                                                             =>
+capsys = <_pytest.capture.CaptureFixture object at 0x0000023679C73920>                                                 =>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023679C73C50>                                           =>
+    def test_out_of_stock(stub_logout, capsys, monkeypatch):                                                           =>
+        login_details = {"username": "Simba", "wallet": 100}                                                           =>
+        cart = ShoppingCart()                                                                                          =>
+        products = [Product("Backpack", 15, 0)]                                                                        =>
+        monkeypatch.setattr("checkout_and_payment.cart", cart)                                                         =>
+        monkeypatch.setattr("builtins.input", fake_input(["1", "l", "y"]))                                             =>
+test_checkout_and_payment.py:95:                                                                                       =>
+login_info = {'username': 'Simba', 'wallet': 100}                                                                      =>
+    def checkoutAndPayment(login_info):                                                                                =>
+        # Create/retrieve a user using login information                                                               =>
+>       user = User(login_info["username"], login_info["wallet"],login_info["cards"])                                  =>
+E       KeyError: 'cards'                                                                                              =>
+checkout_and_payment.py:144: KeyError                                                                                  =>
+______________________________ test_one_product _______________________________                                        =>
+stub_logout = <MagicMock name='logout' id='2432993518528'>                                                             =>
+capsys = <_pytest.capture.CaptureFixture object at 0x0000023679CB1B50>                                                 =>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023679CB1E20>                                           =>
+    def test_one_product(stub_logout, capsys, monkeypatch):                                                            =>
+        login_details = {"username": "Simba", "wallet": 100}                                                           =>
+        products = [Product("Ice cream", 15, 1)]                                                                       =>
+        monkeypatch.setattr("builtins.input", fake_input(["l"]))                                                       =>
+test_checkout_and_payment.py:107:                                                                                      =>
+login_info = {'username': 'Simba', 'wallet': 100}                                                                      =>
+    def checkoutAndPayment(login_info):                                                                                =>
+        # Create/retrieve a user using login information                                                               =>
+>       user = User(login_info["username"], login_info["wallet"],login_info["cards"])                                  =>
+E       KeyError: 'cards'                                                                                              =>
+checkout_and_payment.py:144: KeyError                                                                                  =>
+____________________________ test_several_products ____________________________                                        =>           
+stub_logout = <MagicMock name='logout' id='2432994588144'>                                                             =>
+capsys = <_pytest.capture.CaptureFixture object at 0x0000023679C73E90>                                                 =>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023679C71130>                                           =>
+    def test_several_products(stub_logout, capsys, monkeypatch):                                                       =>
+        login_details = {"username": "Simba", "wallet": 100}                                                           =>
+        monkeypatch.setattr("checkout_and_payment.products", products)                                                 =>
+        monkeypatch.setattr("builtins.input", fake_input(["l"]))                                                       =>
+>       checkoutAndPayment(login_details)                                                                              =>
+test_checkout_and_payment.py:119:                                                                                      =>
+login_info = {'username': 'Simba', 'wallet': 100}                                                                      =>
+    def checkoutAndPayment(login_info):                                                                                =>
+        # Create/retrieve a user using login information                                                               =>
+>       user = User(login_info["username"], login_info["wallet"],login_info["cards"])                                  =>
+E       KeyError: 'cards'                                                                                              =>
+checkout_and_payment.py:144: KeyError                                                                                  =>
+______________________________ test_other_letter ______________________________                                        =>
+stub_logout = <MagicMock name='logout' id='2432994577536'>                                                             =>
+capsys = <_pytest.capture.CaptureFixture object at 0x0000023679CB3AA0>                                                 =>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023679CB1F70>                                           =>
+                                                                                                                       =>
+    def test_other_letter(stub_logout, capsys, monkeypatch):                                                           =>
+        login_details = {"username": "Simba", "wallet": 100}                                                           =>
+        monkeypatch.setattr("checkout_and_payment.products", [])                                                       =>
+        monkeypatch.setattr("builtins.input", fake_input(["a", "l"]))                                                  =>
+>       checkoutAndPayment(login_details)                                                                              =>
+test_checkout_and_payment.py:130:                                                                                      =>
+                                                                                                                       =>
+login_info = {'username': 'Simba', 'wallet': 100}                                                                      =>
+    def checkoutAndPayment(login_info):                                                                                =>
+        # Create/retrieve a user using login information                                                               =>
+>       user = User(login_info["username"], login_info["wallet"],login_info["cards"])                                  =>
+E       KeyError: 'cards'                                                                                              =>
+                                                                                                                       =>
+checkout_and_payment.py:144: KeyError                                                                                  =>
+PASSED test_checkout_and_payment.py::test_buyWithCard                                                                  =>
+PASSED test_checkout_and_payment.py::test_showSingleCard                                                               =>
+PASSED test_checkout_and_payment.py::test_showMultipleCard                                                             =>
+FAILED test_checkout_and_payment.py::test_add_item - KeyError: 'cards'                                                 =>
+FAILED test_checkout_and_payment.py::test_out_of_stock - KeyError: 'cards'                                             =>           
+FAILED test_checkout_and_payment.py::test_one_product - KeyError: 'cards'                                              =>
+FAILED test_checkout_and_payment.py::test_several_products - KeyError: 'cards'                                         =>
+FAILED test_checkout_and_payment.py::test_other_letter - KeyError: 'cards'                                             =>
+========================= 5 failed, 3 passed in 0.11s =========================                                        =>
+test_checkout_and_payment.py .....FFF                                    [100%]                                        <=
+______________________________ test_buyWithCard _______________________________                                        <=
+capsys = <_pytest.capture.CaptureFixture object at 0x0000022C0A6517F0>                                                 <=
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022C0A65CD40>                                           <=
+    def test_buyWithCard(capsys, monkeypatch):                                                                         <=
+        card1 = {"card_number": "1234 5678 9012 3456", "expiry_date": "12/24", "holder_name": "Simba", "cvv": "123"}   <=
+        # card2 = {"card_number": "9876 5432 1098 7654", "expiry_date": "06/23", "holder_name": "Simba", "cvv": "456"} <=
+        login_details = {"username": "Simba", "wallet": 100,"cards":[card1]}                                           <=
+        monkeypatch.setattr("builtins.input", fake_input(["1","c","y","card","1","l"]))                                <=
+test_checkout_and_payment.py:154:                                                                                      <=
+checkout_and_payment.py:216: in checkoutAndPayment                                                                     <=
+    ask_logout = logout(cart)                                                                                          <=
+logout.py:12: in logout                                                                                                <=
+    logout_confirmation = input("Do you still want to logout? (Y/N): ").lower()                                        <=
+foo_bar = 'Do you still want to logout? (Y/N): '                                                                       <=
+    def _fake_input(foo_bar):                                                                                          <=
+        nonlocal i                                                                                                     <=
+>       mimicked_input = input_list[i]                                                                                 <=
+E       IndexError: list index out of range                                                                            <=
+test_checkout_and_payment.py:55: IndexError                                                                            <=
+---------------------------- Captured stdout call -----------------------------                                        <=
+1. Backpack - $15.0 - Units: 1                                                                                         <=
+2. Banana - $15.0 - Units: 5                                                                                           <=
+3. Pens - $0.5 - Units: 10                                                                                             <=
+Backpack added to your cart.                                                                                           <=
+['Backpack', 15.0, 1]                                                                                                  <=
+Thank you for your purchase, Simba! Your remaining balance is 85.0                                                     <=
+Invalid input. Please try again.                                                                                       <=
+Banana added to your cart.                                                                                             <=
+Your cart is not empty.You have following items                                                                        <=
+['Banana', 15.0, 5]                                                                                                    <=
+_____________________________ test_showSingleCard _____________________________                                        <=
+capsys = <_pytest.capture.CaptureFixture object at 0x0000022C0A633590>                                                 <=
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022C0A632DB0>                                           <=
+    def test_showSingleCard(capsys, monkeypatch):                                                                      <=
+        card1 = {"card_number": "1234 5678 9012 3456", "expiry_date": "12/24", "holder_name": "Simba", "cvv": "123"}   <=
+        login_details = {"username": "Simba", "wallet": 100,"cards":[card1]}                                           <=
+        products = [Product("Backpack", 15, 1), Product("Banana", 15, 5), Product("Pens", 0.5, 10)]                    <=
+        monkeypatch.setattr("builtins.input", fake_input(["1","c","y","card","1","l"]))                                <=
+test_checkout_and_payment.py:166:                                                                                      <=
+checkout_and_payment.py:216: in checkoutAndPayment                                                                     <=
+    ask_logout = logout(cart)                                                                                          <=
+logout.py:12: in logout                                                                                                <=
+    logout_confirmation = input("Do you still want to logout? (Y/N): ").lower()                                        <=
+foo_bar = 'Do you still want to logout? (Y/N): '                                                                       <=
+    def _fake_input(foo_bar):                                                                                          <=
+        nonlocal i                                                                                                     <=
+>       mimicked_input = input_list[i]                                                                                 <=
+E       IndexError: list index out of range                                                                            <=
+test_checkout_and_payment.py:55: IndexError                                                                            <=
+---------------------------- Captured stdout call -----------------------------                                        <=
+1. Backpack - $15.0 - Units: 1                                                                                         <=
+2. Banana - $15.0 - Units: 5                                                                                           <=
+3. Pens - $0.5 - Units: 10                                                                                             <=
+Backpack added to your cart.                                                                                           <=
+['Banana', 15.0, 5]                                                                                                    <=
+['Backpack', 15.0, 1]                                                                                                  <=
+Thank you for your purchase, Simba! Your remaining balance is 70.0                                                     <=
+Invalid input. Please try again.                                                                                       <=
+Banana added to your cart.                                                                                             <=
+Your cart is not empty.You have following items                                                                        <=
+['Banana', 15.0, 5]                                                                                                    <=
+____________________________ test_showMultipleCard ____________________________                                        <=
+capsys = <_pytest.capture.CaptureFixture object at 0x0000022C0A651940>                                                 <=
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000022C0A651460>                                           <=           
+    def test_showMultipleCard(capsys, monkeypatch):                                                                    <=
+        card1 = {"card_number": "1234 5678 9012 3456", "expiry_date": "12/24", "holder_name": "Simba", "cvv": "123"}   <=
+        card2 = {"card_number": "9876 5432 1098 7654", "expiry_date": "06/23", "holder_name": "Simba", "cvv": "456"}   <=
+        login_details = {"username": "Simba", "wallet": 100,"cards":[card1,card2]}                                     <=
+        products = [Product("Backpack", 15, 1), Product("Banana", 15, 5), Product("Pens", 0.5, 10)]                    <=
+        monkeypatch.setattr("builtins.input", fake_input(["1","c","y","card","1","l"]))                                <=
+test_checkout_and_payment.py:179:                                                                                      <=
+checkout_and_payment.py:216: in checkoutAndPayment                                                                     <=
+    ask_logout = logout(cart)                                                                                          <=
+logout.py:12: in logout                                                                                                <=
+    logout_confirmation = input("Do you still want to logout? (Y/N): ").lower()                                        <=
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _                                        <=
+foo_bar = 'Do you still want to logout? (Y/N): '                                                                       <=
+    def _fake_input(foo_bar):                                                                                          <=
+        nonlocal i                                                                                                     <=
+>       mimicked_input = input_list[i]                                                                                 <=
+E       IndexError: list index out of range                                                                            <=
+test_checkout_and_payment.py:55: IndexError                                                                            <=
+---------------------------- Captured stdout call -----------------------------                                        <=
+1. Backpack - $15.0 - Units: 1                                                                                         <=
+2. Banana - $15.0 - Units: 5                                                                                           <=
+3. Pens - $0.5 - Units: 10                                                                                             <=
+Backpack added to your cart.                                                                                           <=
+['Banana', 15.0, 5]                                                                                                    <=
+['Backpack', 15.0, 1]                                                                                                  <=
+Thank you for your purchase, Simba! Your remaining balance is 70.0                                                     <=
+Invalid input. Please try again.                                                                                       <=
+Banana added to your cart.                                                                                             <=
+Your cart is not empty.You have following items                                                                        <=
+['Banana', 15.0, 5]                                                                                                    <=
+PASSED test_checkout_and_payment.py::test_add_item                                                                     <=
+PASSED test_checkout_and_payment.py::test_out_of_stock                                                                 <=
+PASSED test_checkout_and_payment.py::test_one_product                                                                  <=
+PASSED test_checkout_and_payment.py::test_several_products                                                             <=
+PASSED test_checkout_and_payment.py::test_other_letter                                                                 <=
+FAILED test_checkout_and_payment.py::test_buyWithCard - IndexError: list inde...                                       <=           
+FAILED test_checkout_and_payment.py::test_showSingleCard - IndexError: list i...                                       <=
+FAILED test_checkout_and_payment.py::test_showMultipleCard - IndexError: list...                                       <=
+========================= 3 failed, 5 passed in 0.24s =========================                                        <=
